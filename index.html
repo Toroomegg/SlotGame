@@ -99,10 +99,15 @@
 
       var script = document.createElement("script");
       script.src = loaderUrl;
+      
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+          // add this line :
+          window.unityInstance = unityInstance;
+          loadingBar.style.display = "none";
+          //
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
@@ -113,7 +118,6 @@
       };
       document.body.appendChild(script);
     </script>
-      
       
     <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore-compat.js"></script>
